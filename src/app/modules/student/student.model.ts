@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import {
+  StudentModel,
   TGuardian,
   TLocalGuardian,
   TStudent,
@@ -133,6 +134,10 @@ const studentSchema = new Schema<TStudent>(
       required: [true, 'Local guardian information is required'],
     },
     profileImg: { type: String },
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicSemester',
+    },
     isDeleted: {
       type: Boolean,
       default: false,
@@ -172,4 +177,4 @@ studentSchema.statics.isUserExists = async function (id: string) {
   return existingUser;
 };
 
-export const Student = model<TStudent>('Student', studentSchema);
+export const Student = model<TStudent, StudentModel>('Student', studentSchema);
