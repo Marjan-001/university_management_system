@@ -60,6 +60,7 @@ throw new Apperror(httpStatus.BAD_REQUEST,'Failed to create user')
   }catch(err){
     await session.abortTransaction();
     await session.endSession();
+    throw new Error('Failed to create student')
   }
 };
 
